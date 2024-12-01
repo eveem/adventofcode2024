@@ -1,0 +1,62 @@
+# Byte-compiled files
+*__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution and packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+.env/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test and coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs and database files
+*.log
+*.sqlite3
+
+# Environment variable files
+.env
+.env.*
+*.env
+
+# Celery beat schedule file
+celerybeat-schedule
+
+# Django migrations
+*.pyc
+db.sqlite3
+
+# Static files (optional, for Django projects)
+staticfiles/
+media/

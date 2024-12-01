@@ -8,3 +8,10 @@ class TestMain(unittest.TestCase):
 
         self.assertEqual(nums1, [3, 4, 2, 1, 3, 3])
         self.assertEqual(nums2, [4, 3, 5, 3, 9 ,3])
+    
+    def test_sort_sum_diff(self):
+        nums1 = [4, 3, 2]
+        nums2 = [1, 3, 2]
+
+        res = sort_sum_diff(nums1, nums2)
+        self.assertEqual(res, 3)
