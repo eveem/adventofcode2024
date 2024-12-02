@@ -36,9 +36,9 @@ def get_direction(nums):
 def is_safe(row, lower, upper):
     direction = get_direction(row)
     if direction == "inc" or direction == "dec":
-        return (diff_in_range(row, lower, upper), direction)
+        return diff_in_range(row, lower, upper)
     else:
-        return (False, direction)
+        return False
 
 def get_properties(nums):
     # tie, inc, dec
@@ -54,27 +54,32 @@ def get_properties(nums):
     
     return (tie, inc, dec)
 
+def remove_one(nums):
+    n = len(nums)
+    for i in range(n):
+        if is_safe(nums[:i] + nums[i + 1:], 1, 3):
+            return True
+    return False
+
 def first_star():
     # safe row is row that inc or dec and has diff in range [1, 3]
     total = 0
     # grid = read_input("small_input.txt")
     grid = read_input("input.txt")
     for row in grid:
-        total += is_safe(row, 1, 3)[0]
+        total += is_safe(row, 1, 3)
     
     print(f"first star result: {total}")
 
 def second_star():
     total = 0
-    grid = read_input("small_input.txt")
-    # grid = read_input("input.txt")
+    # grid = read_input("small_input.txt")
+    grid = read_input("input.txt")
     for row in grid:
-        status, direction = is_safe(row, 1, 3)
-        if status:
+        if is_safe(row, 1, 3) or remove_one(row):
             total += 1
-        else:
-            if direction == "tie":
-                pass
+    
+    print(f"second star result: {total}")
 
 if __name__ == "__main__":
     first_star()

@@ -1,5 +1,5 @@
 import unittest
-from main import read_input, diff_in_range, get_direction, is_safe, get_properties
+from main import read_input, diff_in_range, get_direction, is_safe, get_properties, remove_one
 
 class TestMain(unittest.TestCase):
     def test_read_input(self):
@@ -27,21 +27,22 @@ class TestMain(unittest.TestCase):
         self.assertEqual(get_direction([1, 3, 2, 4, 5]), "switch")
     
     def test_safe_row(self):
-        self.assertEqual(is_safe([7, 6, 4, 2, 1], 1, 3), (True, "dec"))
+        self.assertEqual(is_safe([7, 6, 4, 2, 1], 1, 3), True)
     
     def test_unsafe_row_exceed_diff(self):
-        self.assertEqual(is_safe([8, 4, 3, 2, 1], 1, 3), (False, "dec"))
+        self.assertEqual(is_safe([8, 4, 3, 2, 1], 1, 3), False)
     
     def test_unsafe_row_diff_less_than_lower_bound(self):
-        self.assertEqual(is_safe([2, 4, 6, 8, 9], 2, 3), (False, "inc"))
+        self.assertEqual(is_safe([2, 4, 6, 8, 9], 2, 3), False)
     
     def test_unsafe_tie(self):
-        self.assertEqual(is_safe([8, 6, 4, 4, 1], 1, 3), (False, "tie"))
+        self.assertEqual(is_safe([8, 6, 4, 4, 1], 1, 3), False)
     
     def test_unsafe_switch(self):
-        self.assertEqual(is_safe([1, 3, 2, 4, 5], 1, 3), (False, "switch"))
+        self.assertEqual(is_safe([1, 3, 2, 4, 5], 1, 3), False)
 
     def test_get_properties_inc(self):
+        # tie, inc, dec
         self.assertEqual(get_properties([1, 2, 3, 4, 5]), (0, 4, 0))
     
     def test_get_properties_dec(self):
@@ -55,3 +56,15 @@ class TestMain(unittest.TestCase):
     
     def test_get_properties_dec(self):
         self.assertEqual(get_properties([1, 3, 2, 4, 2]), (0, 2, 2))
+
+    def test_remove_one_switch(self):
+        self.assertEqual(remove_one([1, 3, 2, 4, 5]), True)
+    
+    def test_remove_one_duplicate(self):
+        self.assertEqual(remove_one([1, 3, 4, 4, 5]), True)
+    
+    def test_remove_one_too_large(self):
+        self.assertEqual(remove_one([1, 3, 4, 5, 9]), True)
+
+    def test_remove_one_multiple(self):
+        self.assertEqual(remove_one([1, 4, 4, 4, 9]), False)
