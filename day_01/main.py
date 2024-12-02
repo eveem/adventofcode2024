@@ -45,13 +45,13 @@ def first_star():
     # filename = "small_input.txt"
     filename = "input.txt"
     nums1, nums2 = read_input(filename)
-    print(f"first start result: {sort_sum_diff(nums1, nums2)}")
+    print(f"first star result: {sort_sum_diff(nums1, nums2)}")
 
 def second_star():
     # filename = "small_input.txt"
     filename = "input.txt"
     nums1, nums2 = read_input(filename)
-    print(f"second start result: {find_similarity_score(nums1, nums2)}")
+    print(f"second star result: {find_similarity_score(nums1, nums2)}")
 
 if __name__ == "__main__":
     first_star()
