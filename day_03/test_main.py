@@ -3,7 +3,7 @@ from main import read_input, extract_valid_mul
 
 class TestMain(unittest.TestCase):
     def test_read_small_input(self):
-        filename = "small_input.txt"
+        filename = "1_small_input.txt"
         lines = read_input(filename)
 
         self.assertEqual(len(lines), 1)

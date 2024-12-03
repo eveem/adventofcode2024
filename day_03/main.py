@@ -36,7 +36,7 @@ def extract_valid_mul(s):
 
 def first_star():
     total = 0
-    # lines = read_input("small_input.txt")
+    # lines = read_input("1_small_input.txt")
     lines = read_input("input.txt")
 
     for line in lines:
