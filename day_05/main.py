@@ -52,6 +52,22 @@ def permutation(nums):
     _helper([])
     return res
 
+def count_freq(valid, nums):
+    res = dict()
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if (nums[i], nums[j]) in valid:
+                if nums[i] not in res:
+                    res[nums[i]] = 0
+                res[nums[i]] += 1
+            if  (nums[j], nums[i]) in valid:
+                if nums[j] not in res:
+                    res[nums[j]] = 0
+                res[nums[j]] += 1
+
+    return res
+
 def first_star():
     total = 0
     # valid, order = read_input("small_input.txt")
@@ -72,10 +88,9 @@ def second_star():
     for line in order:
         n = len(line)
         if not is_correct_order(valid, line):
-            for new_order in permutation(line):
-                if is_correct_order(valid, new_order):
-                    total += new_order[n // 2]
-                    break
+            freq = count_freq(valid, line)
+            res = [k for k, _ in sorted(freq.items(), key=lambda item: item[1], reverse=True)]
+            total += res[n // 2]
 
     print(f"second star result: {total}")
 
