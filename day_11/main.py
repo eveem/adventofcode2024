@@ -5,49 +5,47 @@ sys.set_int_max_str_digits(0)
 def read_input(filename):
     with open(filename, "r") as file:
         for line in file:
-            return line.strip().split(" ")
+            return Counter(line.strip().split(" "))
 
-def blink(stone):
-    if stone == "0":
-        return ["1"]
-    elif len(stone) % 2 == 0:
-        m = len(stone) // 2
-        l = stone[:m].lstrip("0")
-        r = stone[m:].lstrip("0")
-        if len(l) == 0:
-            l = "0"
-        if len(r) == 0:
-            r = "0"
-        return [l, r]
+def blink(stones):
+    temp = Counter()
+    for k, v in stones.items():
+        if k == "0":
+            temp["1"] += v
+        elif len(k) % 2 == 0:
+            m = len(k) // 2
+            l = k[:m].lstrip("0")
+            r = k[m:].lstrip("0")
+            if len(l) == 0:
+                l = "0"
+            if len(r) == 0:
+                r = "0"
+            temp[l] += v
+            temp[r] += v
+        else:
+            temp[str(int(k) * 2024)] += v
     
-    return [str(int(stone) * 2024)]
-
-def calculate(stones):
-    res = []
-
-    for stone in stones:
-        for s in blink(stone):
-            res.append(s)
-
-    return res
+    return temp
 
 def first_star():
-    stones = read_input("small_input_02.txt")
-    # stones = read_input("input.txt")
+    # stones = read_input("small_input_02.txt")
+    stones = read_input("input.txt")
     TIME = 25
 
     for _ in range(TIME):
-        stones = calculate(stones)
+        stones = blink(stones)
 
-    print(f"first star result: {len(stones)}")
+    print(f"first star result: {sum(stones.values())}")
 
 def second_star():
     # stones = read_input("small_input_01.txt")
     stones = read_input("input.txt")
     TIME = 75
-    total = 0
-    
-    print(f"second star result: {total}")
+
+    for _ in range(TIME):
+        stones = blink(stones)
+
+    print(f"second star result: {sum(stones.values())}")
 
 if __name__ == "__main__":
     first_star()
